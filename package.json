@@ -1,0 +1,8 @@
+{
+  "name": "movies_project",
+  "version": "1.0.0",
+  "description": "Application to search and get info about cinema",
+  "main": "index.js",
+  "author": "TiagoAraujoDev <102497603+TiagoAraujoDev@users.noreply.github.com>",
+  "license": "MIT"
+}
