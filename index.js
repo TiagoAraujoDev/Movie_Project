@@ -1,23 +1,30 @@
-import { BASE_URL, API_KEY } from "./enviroment/key.js";
+import { BASE_URL, API_KEY } from "./environment/key.js";
 
 const moviesContainer = document.querySelector(".movies-container");
+const searchButton = document.querySelector(".search-button");
 
-let showPopularMovies = async () => {
+const getPopularMovies = async () => {
   const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
 
-  const data = await response.json();
+  const { results } = await response.json();
 
-  const movies = data.results;
-  movies.forEach((movie) => {
+  results.forEach((movie) => {
     renderMovies(movie);
   });
 };
 
-window.addEventListener("load", () => {
-  showPopularMovies();
-});
+const searchMovies = async (searchTerm) => {
+  const response = await fetch(
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${searchTerm}`
+  );
+  const { results } = await response.json();
 
-function renderMovies(movie) {
+  results.forEach((movie) => {
+    renderMovies(movie);
+  });
+};
+
+const renderMovies = (movie) => {
   const {
     title,
     vote_average,
@@ -90,4 +97,14 @@ function renderMovies(movie) {
   movieDescription.classList.add("movie-description");
   movieDescription.textContent = overview;
   movieStats.appendChild(movieDescription);
-}
+};
+
+window.addEventListener("load", () => {
+  getPopularMovies();
+});
+
+searchButton.addEventListener("click", () => {
+  moviesContainer.innerHTML = "";
+  const searchText = document.querySelector("#search-input").value;
+  searchMovies(searchText);
+})

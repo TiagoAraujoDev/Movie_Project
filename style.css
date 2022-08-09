@@ -84,6 +84,13 @@ div.search-box input::placeholder {
   color: #8a8a8a;
 }
 
+div.search-box button.search-button {
+  background-color: transparent;
+  border: none;
+
+  cursor: pointer;
+} 
+
 div.checkbox {
   display: flex;
   justify-content: center;
