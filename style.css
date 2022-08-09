@@ -47,9 +47,33 @@ div.search-box {
 }
 
 div.search-box input {
+  font-size: 1.8rem;
   width: 29.3rem;
   height: 2.2rem;
   border: none;
+}
+
+div.search-box input:focus {
+  outline: none;
+}
+
+div.search-box input::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+div.search-box input::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+div.search-box input::-webkit-search-decoration,
+div.search-box input::-webkit-search-cancel-button,
+div.search-box input::-webkit-search-results-button,
+div.search-box input::-webkit-search-results-decoration {
+  display: none;
 }
 
 div.search-box input::placeholder {

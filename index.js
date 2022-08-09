@@ -1,5 +1,4 @@
-const API_KEY = "c02dd4ddeac59e9102f1c88c1581640c";
-const BASE_URL = "https://api.themoviedb.org/3";
+import { BASE_URL, API_KEY } from "./enviroment/key.js";
 
 const moviesContainer = document.querySelector(".movies-container");
 
@@ -19,7 +18,14 @@ window.addEventListener("load", () => {
 });
 
 function renderMovies(movie) {
-  const { title, vote_average, release_date, overview, isFavorite, backdrop_path } = movie;
+  const {
+    title,
+    vote_average,
+    release_date,
+    overview,
+    isFavorite,
+    poster_path,
+  } = movie;
 
   const imgURL = "https://image.tmdb.org/t/p/w500";
 
@@ -29,7 +35,7 @@ function renderMovies(movie) {
 
   const movieImage = document.createElement("img");
   movieImage.classList.add("cover");
-  movieImage.src = imgURL + backdrop_path;
+  movieImage.src = imgURL + poster_path;
   movieImage.alt = `${title} cover`;
   movieCard.appendChild(movieImage);
 
