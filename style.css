@@ -174,7 +174,7 @@ div.movie-rate {
   margin-right: 4.5rem;
 }
 
-div.movie-rate svg {
+div.movie-rate .star {
   margin-right: 1.2rem;
 }
 
@@ -192,7 +192,7 @@ div.movie-fav {
   justify-content: center;
 }
 
-div.movie-fav svg {
+div.movie-fav .heart {
   margin-right: 1.2rem;
 }
 
