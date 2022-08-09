@@ -133,7 +133,9 @@ div.movie {
   margin-bottom: 2rem;
 }
 
-div.movie img {
+div.movie img.cover {
+  width: 14rem;
+  height: 14rem;
   filter: drop-shadow(20px 20px 30px rgba(0, 0, 0, 0.3));
   border-radius: 80rem;
   margin-right: 6.4rem;

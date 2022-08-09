@@ -1,57 +1,35 @@
+const API_KEY = "c02dd4ddeac59e9102f1c88c1581640c";
+const BASE_URL = "https://api.themoviedb.org/3";
+
 const moviesContainer = document.querySelector(".movies-container");
 
-const movies = [
-  {
-    image: "./assets/movie-1.png",
-    title: "Avengers Endgame",
-    rate: 9.2,
-    year: 2019,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    isFavorite: true,
-  },
-  {
-    image: "./assets/movie-2.png",
-    title: "The Batman",
-    rate: 9.5,
-    year: 2022,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    isFavorite: true,
-  },
-  {
-    image: "./assets/movie-3.png",
-    title: "Doctor Strange",
-    rate: 9.8,
-    year: 2022,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    isFavorite: false,
-  },
-  {
-    image: "./assets/movie-4.png",
-    title: "Avatar",
-    rate: 8.2,
-    year: 2011,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    isFavorite: false,
-  },
-];
+let showPopularMovies = async () => {
+  const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
+
+  const data = await response.json();
+
+  const movies = data.results;
+  movies.forEach((movie) => {
+    renderMovies(movie);
+  });
+};
 
 window.addEventListener("load", () => {
-  movies.forEach((movie) => renderMovies(movie));
+  showPopularMovies();
 });
 
 function renderMovies(movie) {
-  const { image, title, rate, year, description, isFavorite } = movie;
+  const { title, vote_average, release_date, overview, isFavorite, backdrop_path } = movie;
+
+  const imgURL = "https://image.tmdb.org/t/p/w500";
 
   const movieCard = document.createElement("div");
   movieCard.classList.add("movie");
   moviesContainer.appendChild(movieCard);
 
   const movieImage = document.createElement("img");
-  movieImage.src = image;
+  movieImage.classList.add("cover");
+  movieImage.src = imgURL + backdrop_path;
   movieImage.alt = `${title} cover`;
   movieCard.appendChild(movieImage);
 
@@ -64,7 +42,7 @@ function renderMovies(movie) {
   movieStats.appendChild(movieHeader);
 
   const movieTitle = document.createElement("h2");
-  movieTitle.textContent = `${title} (${year})`;
+  movieTitle.textContent = `${title} (${release_date.slice(0, 4)})`;
   movieHeader.appendChild(movieTitle);
 
   const movieInteractions = document.createElement("div");
@@ -83,7 +61,7 @@ function renderMovies(movie) {
 
   const rating = document.createElement("span");
   rating.setAttribute("id", "movie-rate");
-  rating.textContent = rate;
+  rating.textContent = vote_average;
   movieRate.appendChild(rating);
 
   const movieFav = document.createElement("div");
@@ -104,6 +82,6 @@ function renderMovies(movie) {
 
   const movieDescription = document.createElement("p");
   movieDescription.classList.add("movie-description");
-  movieDescription.textContent = description;
+  movieDescription.textContent = overview;
   movieStats.appendChild(movieDescription);
 }
