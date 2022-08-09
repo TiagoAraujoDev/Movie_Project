@@ -130,6 +130,7 @@ div.movie {
     1.4367px 1.07399px 4.56719px rgba(0, 0, 0, 0.04875),
     0.333519px 0.249318px 2.42246px rgba(0, 0, 0, 0.0285938);
   background: #1d1c3b;
+  margin-bottom: 2rem;
 }
 
 div.movie img {
@@ -176,6 +177,7 @@ div.movie-rate {
 
 div.movie-rate .star {
   margin-right: 1.2rem;
+  border-radius: 0;
 }
 
 div.movie-rate span#movie-rate {
@@ -194,6 +196,7 @@ div.movie-fav {
 
 div.movie-fav .heart {
   margin-right: 1.2rem;
+  border-radius: 0;
 }
 
 div.movie-fav span {
