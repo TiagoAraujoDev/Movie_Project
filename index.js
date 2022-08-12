@@ -1,7 +1,23 @@
-import { BASE_URL, API_KEY } from "./environment/key.js";
+import { BASE_URL, API_KEY } from "./env/key.js";
+import { FavoriteMovie } from "./FavoriteMovie.js";
 
 const moviesContainer = document.querySelector(".movies-container");
 const searchButton = document.querySelector(".search-button");
+const favoritesCheckbox = document.querySelector("input#favorites");
+
+const filterFavoriteMovies = (popularMovie) => {
+  const favoriteMovies = getFavoriteMovies();
+
+  const favoriteMovie = favoriteMovies.find(
+    (movie) => movie.title === popularMovie.title
+  );
+
+  if (!favoriteMovie) {
+    return false;
+  }
+
+  return favoriteMovie.isFavorite;
+};
 
 const getPopularMovies = async () => {
   const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
@@ -9,7 +25,8 @@ const getPopularMovies = async () => {
   const { results } = await response.json();
 
   results.forEach((movie) => {
-    renderMovies(movie);
+    const isFavorite = filterFavoriteMovies(movie);
+    renderMovies(movie, isFavorite);
   });
 };
 
@@ -20,19 +37,76 @@ const searchMovies = async (searchTerm) => {
   const { results } = await response.json();
 
   results.forEach((movie) => {
-    renderMovies(movie);
+    const isFavorite = filterFavoriteMovies(movie);
+    renderMovies(movie, isFavorite);
   });
 };
 
-const renderMovies = (movie) => {
-  const {
-    title,
-    vote_average,
-    release_date,
-    overview,
-    isFavorite,
-    poster_path,
-  } = movie;
+const getFavoriteMovies = () => {
+  let movies = JSON.parse(localStorage.getItem("FavoriteMovies"));
+
+  if (!movies) {
+    movies = [];
+  }
+  return movies;
+};
+
+const saveInLocalStorage = (movie) => {
+  const movies = getFavoriteMovies();
+
+  const movieAlreadyFavorite = movies.some(
+    (movieInLocalStorage) => movieInLocalStorage.title === movie.title
+  );
+
+  if (!movieAlreadyFavorite) {
+    movies.push(movie);
+
+    const moviesJSON = JSON.stringify(movies);
+
+    localStorage.setItem("FavoriteMovies", moviesJSON);
+  } else {
+    const movieIndex = movies.findIndex(
+      (movieInLocalStorage) => movieInLocalStorage.title === movie.title
+    );
+
+    movies.splice(movieIndex, 1);
+
+    const moviesJSON = JSON.stringify(movies);
+
+    localStorage.setItem("FavoriteMovies", moviesJSON);
+  }
+};
+
+const setFavorite = (movie) => {
+  const favoriteMovie = new FavoriteMovie(movie);
+
+  saveInLocalStorage(favoriteMovie);
+};
+
+const showOnlyFavorites = () => {
+  const favoriteMovies = getFavoriteMovies();
+
+  if (!favoriteMovies) {
+    showError("No favorite movies!");
+  }
+
+  favoriteMovies.forEach((movie) => {
+    renderMovies(movie, movie.isFavorite);
+  });
+};
+
+const changeHeartStyle = (heartIcon) => {
+  heartIcon.src = heartIcon.src.includes("full")
+    ? (heartIcon.src = "./assets/svg/Heart.svg")
+    : (heartIcon.src = "./assets/svg/Heart-full.svg");
+};
+
+const clearMoviesContainer = () => {
+  moviesContainer.innerHTML = "";
+};
+
+const renderMovies = (movie, isFavorite = false) => {
+  const { title, vote_average, release_date, overview, poster_path } = movie;
 
   const imgURL = "https://image.tmdb.org/t/p/w500";
 
@@ -88,6 +162,10 @@ const renderMovies = (movie) => {
     : "./assets/svg/Heart.svg";
   heartIcon.alt = "Heart icon";
   movieFav.appendChild(heartIcon);
+  heartIcon.onclick = () => {
+    setFavorite(movie);
+    changeHeartStyle(heartIcon);
+  };
 
   const favText = document.createElement("span");
   favText.textContent = "Favoritar";
@@ -104,7 +182,16 @@ window.addEventListener("load", () => {
 });
 
 searchButton.addEventListener("click", () => {
-  moviesContainer.innerHTML = "";
+  clearMoviesContainer();
   const searchText = document.querySelector("#search-input").value;
   searchMovies(searchText);
-})
+});
+
+favoritesCheckbox.addEventListener("change", () => {
+  clearMoviesContainer();
+  if (favoritesCheckbox.checked) {
+    showOnlyFavorites();
+  } else {
+    getPopularMovies();
+  }
+});

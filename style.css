@@ -230,6 +230,14 @@ div.movie-fav {
 div.movie-fav .heart {
   margin-right: 1.2rem;
   border-radius: 0;
+
+  transition: 400ms ease-in-out;
+
+  cursor: pointer;
+}
+
+div.movie-fav .heart:hover {
+  width: 2.4rem;
 }
 
 div.movie-fav span {
