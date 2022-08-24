@@ -1,20 +1,6 @@
 import { BASE_URL, API_KEY } from "../env/key.js";
 import { renderMovies } from "./render.js";
-import { getFavoriteMovies } from "./localStorage.js"
-
-const filterFavoriteMovies = (popularMovie) => {
-  const favoriteMovies = getFavoriteMovies();
-
-  const favoriteMovie = favoriteMovies.find(
-    (movie) => movie.title === popularMovie.title
-  );
-
-  if (!favoriteMovie) {
-    return false;
-  }
-
-  return favoriteMovie.isFavorite;
-};
+import { filterFavoriteMovies } from "./localStorage.js";
 
 const getPopularMovies = async () => {
   const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
@@ -39,4 +25,4 @@ const searchMovies = async (searchTerm) => {
   });
 };
 
-export { filterFavoriteMovies, getPopularMovies, searchMovies };
+export { getPopularMovies, searchMovies };

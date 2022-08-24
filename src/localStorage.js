@@ -1,6 +1,20 @@
 import { FavoriteMovie } from "./FavoriteMovie.js";
 import { renderMovies } from "./render.js";
 
+const filterFavoriteMovies = (popularMovie) => {
+  const favoriteMovies = getFavoriteMovies();
+
+  const favoriteMovie = favoriteMovies.find(
+    (movie) => movie.title === popularMovie.title
+  );
+
+  if (!favoriteMovie) {
+    return false;
+  }
+
+  return favoriteMovie.isFavorite;
+};
+
 const getFavoriteMovies = () => {
   let movies = JSON.parse(localStorage.getItem("FavoriteMovies"));
 
@@ -60,4 +74,11 @@ const changeHeartStyle = (heartIcon) => {
     : (heartIcon.src = "./assets/svg/Heart-full.svg");
 };
 
-export { getFavoriteMovies, setFavorite, saveInLocalStorage, changeHeartStyle, showOnlyFavorites };
+export {
+  getFavoriteMovies,
+  setFavorite,
+  saveInLocalStorage,
+  changeHeartStyle,
+  showOnlyFavorites,
+  filterFavoriteMovies,
+};
