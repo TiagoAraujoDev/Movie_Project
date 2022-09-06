@@ -1,5 +1,5 @@
 import { BASE_URL, API_KEY } from "../env/key.js";
-import { renderMovies } from "./render.js";
+import { renderMovie } from "./renderMovie.js";
 import { filterFavoriteMovies } from "./localStorage.js";
 
 const getPopularMovies = async () => {
@@ -9,7 +9,7 @@ const getPopularMovies = async () => {
 
   results.forEach((movie) => {
     const isFavorite = filterFavoriteMovies(movie);
-    renderMovies(movie, isFavorite);
+    renderMovie(movie, isFavorite);
   });
 };
 
@@ -21,7 +21,7 @@ const searchMovies = async (searchTerm) => {
 
   results.forEach((movie) => {
     const isFavorite = filterFavoriteMovies(movie);
-    renderMovies(movie, isFavorite);
+    renderMovie(movie, isFavorite);
   });
 };
 

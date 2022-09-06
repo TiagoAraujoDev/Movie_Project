@@ -1,10 +1,6 @@
 import { getPopularMovies, searchMovies } from "./src/apiRequests.js";
-import { moviesContainer, searchButton, favoritesCheckbox } from "./src/DOMElements.js";
+import { searchButton, favoritesCheckbox, clearMoviesContainer } from "./src/DOMElements.js";
 import { showOnlyFavorites } from "./src/localStorage.js";
-
-const clearMoviesContainer = () => {
-  moviesContainer.innerHTML = "";
-};
 
 window.addEventListener("load", () => {
   getPopularMovies();

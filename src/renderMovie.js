@@ -1,7 +1,8 @@
 import { setFavorite, changeHeartStyle } from "./localStorage.js";
 import { moviesContainer } from "./DOMElements.js";
+import { renderMovieDetails } from "./renderMoviesDetails.js";
 
-const renderMovies = (movie, isFavorite = false) => {
+const renderMovie = (movie, isFavorite = false) => {
   const { title, vote_average, release_date, overview, poster_path } = movie;
 
   const imgURL = "https://image.tmdb.org/t/p/w500";
@@ -27,6 +28,9 @@ const renderMovies = (movie, isFavorite = false) => {
   const movieTitle = document.createElement("h2");
   movieTitle.textContent = `${title} (${release_date.slice(0, 4)})`;
   movieHeader.appendChild(movieTitle);
+  movieTitle.onclick = () => {
+    renderMovieDetails(movie);
+  }
 
   const movieInteractions = document.createElement("div");
   movieInteractions.classList.add("movie-interactions");
@@ -73,4 +77,4 @@ const renderMovies = (movie, isFavorite = false) => {
   movieStats.appendChild(movieDescription);
 };
 
-export { renderMovies };
+export { renderMovie };
