@@ -1,0 +1,65 @@
+/* div.header-poster { */
+/*   width: 100%; */
+/*   height: 280px; */
+/**/
+/*   border: 0.2rem solid #706ea8; */
+/*   border-radius: 0.5rem; */
+/*   margin-bottom: 0.5rem; */
+/**/
+/*   background-image: url("https://image.tmdb.org/t/p/w500/ugS5FVfCI3RV0ZwZtBV3HAV75OX.jpg"); */
+/*   background-clip: content-box; */
+/*   background-position: center; */
+/*   background-repeat: no-repeat; */
+/* } */
+
+div.details-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+div.details-container div.movie-cover {
+  width: 200px;
+  height: 300px;
+  margin-right: 1rem;
+
+  border: 0.2rem solid #706ea8;
+  border-radius: 0.5rem;
+
+  background-image: url("https://image.tmdb.org/t/p/w500/rugyJdeoJm7cSJL1q4jBpTNbxyU.jpg");
+  background-clip: content-box;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+div.movie-infos h1 {
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+div.movie-infos h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+div.movie-infos p:first-of-type {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+div.movie-infos img {
+  margin-right: 1rem;
+}
+
+div.movie-infos span {
+  font-size: 2rem;
+  color: #fff;
+}
+
+div.movie-infos p:first-of-type + p {
+  color: red;
+}
+
