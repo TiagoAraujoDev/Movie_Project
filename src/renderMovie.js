@@ -1,9 +1,10 @@
 import { setFavorite, changeHeartStyle } from "./localStorage.js";
 import { moviesContainer } from "./DOMElements.js";
-import { renderMovieDetails } from "./renderMoviesDetails.js";
+import { renderMovieDetails } from "./renderMovieDetails.js";
+import { getMovieDetails } from "./apiRequests.js";
 
 const renderMovie = (movie, isFavorite = false) => {
-  const { title, vote_average, release_date, overview, poster_path } = movie;
+  const { id, title, vote_average, release_date, overview, poster_path } = movie;
 
   const imgURL = "https://image.tmdb.org/t/p/w500";
 
@@ -28,9 +29,6 @@ const renderMovie = (movie, isFavorite = false) => {
   const movieTitle = document.createElement("h2");
   movieTitle.textContent = `${title} (${release_date.slice(0, 4)})`;
   movieHeader.appendChild(movieTitle);
-  movieTitle.onclick = () => {
-    renderMovieDetails(movie);
-  }
 
   const movieInteractions = document.createElement("div");
   movieInteractions.classList.add("movie-interactions");
@@ -68,13 +66,23 @@ const renderMovie = (movie, isFavorite = false) => {
   };
 
   const favText = document.createElement("span");
-  favText.textContent = "Favoritar";
+  favText.textContent = "Favorite";
   movieFav.appendChild(favText);
 
   const movieDescription = document.createElement("p");
   movieDescription.classList.add("movie-description");
   movieDescription.textContent = overview;
   movieStats.appendChild(movieDescription);
+
+  const moreDetails = document.createElement("span");
+  moreDetails.classList.add("more-details");
+  moreDetails.textContent = "See more details"
+  movieCard.appendChild(moreDetails);
+  moreDetails.onclick = async () => {
+    const detailedMovie = await getMovieDetails(id);
+    renderMovieDetails(detailedMovie);
+  }
+
 };
 
 export { renderMovie };

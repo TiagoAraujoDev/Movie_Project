@@ -1,4 +1,4 @@
-import { BASE_URL, API_KEY } from "../env/key.js";
+import { BASE_URL, API_KEY, BASE_DETAILS_URL } from "../env/key.js";
 import { renderMovie } from "./renderMovie.js";
 import { filterFavoriteMovies } from "./localStorage.js";
 
@@ -25,4 +25,13 @@ const searchMovies = async (searchTerm) => {
   });
 };
 
-export { getPopularMovies, searchMovies };
+const getMovieDetails = async (id) => {
+  const response = await fetch(
+    `${BASE_DETAILS_URL}${id}?api_key=${API_KEY}&language=en-US`
+  );
+  const data = await response.json();
+
+  return data;
+};
+
+export { getPopularMovies, searchMovies, getMovieDetails };
