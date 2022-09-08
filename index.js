@@ -1,5 +1,5 @@
 import { getPopularMovies, searchMovies } from "./src/apiRequests.js";
-import { searchButton, favoritesCheckbox, clearMoviesContainer } from "./src/DOMElements.js";
+import { searchButton, favoritesCheckbox, clearMoviesContainer, searchInput } from "./src/DOMElements.js";
 import { showOnlyFavorites } from "./src/localStorage.js";
 
 window.addEventListener("load", () => {
@@ -11,6 +11,12 @@ searchButton.addEventListener("click", () => {
   const searchText = document.querySelector("#search-input").value;
   searchMovies(searchText);
 });
+
+searchInput.addEventListener("search", () => {
+  clearMoviesContainer();
+  const searchText = document.querySelector("#search-input").value;
+  searchMovies(searchText);
+})
 
 favoritesCheckbox.addEventListener("change", () => {
   clearMoviesContainer();
