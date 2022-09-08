@@ -48,8 +48,8 @@ div.search-box {
 
 div.search-box input {
   font-size: 1.8rem;
-  width: 29.3rem;
-  height: 2.2rem;
+  width: 56rem;
+  height: 3.2rem;
   border: none;
 }
 
@@ -97,7 +97,7 @@ div.checkbox {
   align-items: center;
   gap: 1.1rem;
 
-  margin: 0rem auto 6.7rem;
+  margin: 0rem auto 1.9rem;
 }
 
 input#favorites {
@@ -142,12 +142,15 @@ div.movies-container {
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin-bottom: 2.5rem;
 }
 
 div.movies-container div.movie {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  position: relative;
 }
 
 div.movie {
@@ -169,7 +172,7 @@ div.movie img.cover {
   width: 14rem;
   height: 14rem;
   filter: drop-shadow(20px 20px 30px rgba(0, 0, 0, 0.3));
-  border-radius: 80rem;
+  border-radius: 40rem;
   margin-right: 6.4rem;
 }
 
@@ -255,4 +258,24 @@ div.movie-fav span {
   line-height: 3.2rem;
 
   color: #acacac;
+}
+
+span.more-details {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+
+  width: 10.5rem;
+
+  font-size: 1.1rem;
+  font-family: "Kumbh Sans", sans-serif;
+  text-align: center;
+  color: #111;
+
+  cursor: pointer;
+
+  filter: drop-shadow(20px 20px 30px rgba(0, 0, 0, 0.3));
+  border-radius: 0.5rem;
+  padding: 0.3rem;
+  background-color: #706ea8;
 }

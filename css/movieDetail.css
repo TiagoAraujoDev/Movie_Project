@@ -1,29 +1,31 @@
-/* div.header-poster { */
-/*   width: 100%; */
-/*   height: 280px; */
-/**/
-/*   border: 0.2rem solid #706ea8; */
-/*   border-radius: 0.5rem; */
-/*   margin-bottom: 0.5rem; */
-/**/
-/*   background-image: url("https://image.tmdb.org/t/p/w500/ugS5FVfCI3RV0ZwZtBV3HAV75OX.jpg"); */
-/*   background-clip: content-box; */
-/*   background-position: center; */
-/*   background-repeat: no-repeat; */
-/* } */
-
 div.details-container {
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-areas: 
+    "Cover title title"
+    "Cover infos1 infos2"
+    "Cover description description"
+  ;
+  gap: 1rem;
+
+  border-radius: 0.8rem;
+  padding: 0.5rem;
+  box-shadow: 32.8387px 24.5482px 79px rgba(0, 0, 0, 0.15),
+    23.8851px 17.855px 53.2479px rgba(0, 0, 0, 0.121406),
+    16.6246px 12.4276px 34.4391px rgba(0, 0, 0, 0.10125),
+    10.9035px 8.15079px 21.3701px rgba(0, 0, 0, 0.0867188),
+    6.56775px 4.90965px 12.8375px rgba(0, 0, 0, 0.075),
+    3.46346px 2.58907px 7.6377px rgba(0, 0, 0, 0.0632813),
+    1.4367px 1.07399px 4.56719px rgba(0, 0, 0, 0.04875),
+    0.333519px 0.249318px 2.42246px rgba(0, 0, 0, 0.0285938);
+  background: #1d1c3b;
 }
 
 div.details-container div.movie-cover {
+  grid-area: Cover;
   width: 200px;
   height: 300px;
-  margin-right: 1rem;
 
-  border: 0.2rem solid #706ea8;
-  border-radius: 0.5rem;
+  border-radius: 0.8rem;
 
   background-image: url("https://image.tmdb.org/t/p/w500/rugyJdeoJm7cSJL1q4jBpTNbxyU.jpg");
   background-clip: content-box;
@@ -32,34 +34,64 @@ div.details-container div.movie-cover {
   background-repeat: no-repeat;
 }
 
-div.movie-infos h1 {
+div.details-container div.movie-title-info {
+  grid-area: title;
+  justify-self: center;
+}
+
+div.details-container div.movie-title-info h1 {
   font-size: 2.4rem;
   font-weight: 600;
   color: #fff;
 }
 
-div.movie-infos h2 {
+div.details-container div.movie-title-info h2 {
   font-size: 1.6rem;
   font-weight: 600;
   color: #fff;
 }
 
-div.movie-infos p:first-of-type {
+div.details-container div.movie-details-info {
+  grid-area: infos1;
+  margin-left: 0.2rem;
+}
+
+div.movie-details-info span {
   font-size: 1.6rem;
-  font-weight: 600;
   color: #fff;
 }
 
-div.movie-infos img {
-  margin-right: 1rem;
+div.details-container div.movie-details-info div.rating {
+  display: flex;
+  justify-content: start;
 }
 
-div.movie-infos span {
-  font-size: 2rem;
+div.movie-details-info div.rating img {
+  margin-inline: 1rem;
+}
+
+div.details-container div.movie-details-info2 {
+  grid-area: infos2;
+  display: flex;
+  flex-direction: column;
+}
+
+div.details-container div.movie-details-info2 span {
+  font-size: 1.6rem;
   color: #fff;
 }
 
-div.movie-infos p:first-of-type + p {
-  color: red;
+div.details-container div.movie-description-info {
+  grid-area: description;
+}
+
+div.details-container div.movie-description-info h3 {
+  font-size: 2.4rem;
+  color: #fff;
+}
+
+div.movie-description-info p {
+  font-size: 2.0rem;
+  color: #fff;
 }
 
