@@ -1,28 +1,37 @@
-import { getPopularMovies, searchMovies } from "./src/apiRequests.js";
-import { searchButton, favoritesCheckbox, clearMoviesContainer, searchInput } from "./src/DOMElements.js";
-import { showOnlyFavorites } from "./src/localStorage.js";
+import { App } from "./src/App.js";
+// import { getPopularMovies, searchMovies } from "./src/apiRequests.js";
+// import {
+//   searchButton,
+//   favoritesCheckbox,
+//   clearMoviesContainer,
+//   searchInput,
+// } from "./src/DOMElements.js";
+// import { showOnlyFavorites } from "./src/localStorage.js";
 
-window.addEventListener("load", () => {
-  getPopularMovies();
-});
+const Main = document.querySelector("#root");
+Main.appendChild(App());
 
-searchButton.addEventListener("click", () => {
-  clearMoviesContainer();
-  const searchText = document.querySelector("#search-input").value;
-  searchMovies(searchText);
-});
+// window.addEventListener("load", () => {
+//   getPopularMovies();
+// });
 
-searchInput.addEventListener("search", () => {
-  clearMoviesContainer();
-  const searchText = document.querySelector("#search-input").value;
-  searchMovies(searchText);
-})
+// searchButton.addEventListener("click", () => {
+//   clearMoviesContainer();
+//   const searchText = document.querySelector("#search-input").value;
+//   searchMovies(searchText);
+// });
 
-favoritesCheckbox.addEventListener("change", () => {
-  clearMoviesContainer();
-  if (favoritesCheckbox.checked) {
-    showOnlyFavorites();
-  } else {
-    getPopularMovies();
-  }
-});
+// searchInput.addEventListener("search", () => {
+//   clearMoviesContainer();
+//   const searchText = document.querySelector("#search-input").value;
+//   searchMovies(searchText);
+// });
+
+// favoritesCheckbox.addEventListener("change", () => {
+//   clearMoviesContainer();
+//   if (favoritesCheckbox.checked) {
+//     showOnlyFavorites();
+//   } else {
+//     getPopularMovies();
+//   }
+// });
