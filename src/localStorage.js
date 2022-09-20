@@ -1,5 +1,5 @@
 import { FavoriteMovie } from "./FavoriteMovie.js";
-import { renderMovie } from "./renderMovie.js";
+import { MovieCard } from "./components/MovieCard.js";
 
 const filterFavoriteMovies = (popularMovie) => {
   const favoriteMovies = getFavoriteMovies();
@@ -64,7 +64,7 @@ const showOnlyFavorites = () => {
   }
 
   favoriteMovies.forEach((movie) => {
-    renderMovie(movie, movie.isFavorite);
+    MovieCard(movie, movie.isFavorite);
   });
 };
 

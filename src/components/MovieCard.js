@@ -1,26 +1,28 @@
-import { setFavorite, changeHeartStyle } from "./localStorage.js";
-import { moviesContainer } from "./DOMElements.js";
-import { renderMovieDetails } from "./renderMovieDetails.js";
-import { getMovieDetails } from "./apiRequests.js";
+import { setFavorite, changeHeartStyle } from "../localStorage.js";
+import { MovieDetails } from "./MovieDetails.js";
+import { getMovieDetails } from "../router/apiRequests.js";
 
-const renderMovie = (movie, isFavorite = false) => {
-  const { id, title, vote_average, release_date, overview, poster_path } = movie;
+const MovieCard = (movie, isFavorite = false) => {
+  const moviesContainer = document.querySelector(".movies-container");
+
+  const { id, title, vote_average, release_date, overview, poster_path } =
+    movie;
 
   const imgURL = "https://image.tmdb.org/t/p/w500";
 
-  const movieCard = document.createElement("div");
-  movieCard.classList.add("movie");
-  moviesContainer.appendChild(movieCard);
+  const MovieCard = document.createElement("div");
+  MovieCard.classList.add("movie");
+  moviesContainer.appendChild(MovieCard);
 
   const movieImage = document.createElement("img");
   movieImage.classList.add("cover");
   movieImage.src = imgURL + poster_path;
   movieImage.alt = `${title} cover`;
-  movieCard.appendChild(movieImage);
+  MovieCard.appendChild(movieImage);
 
   const movieStats = document.createElement("div");
   movieStats.classList.add("movie-stats");
-  movieCard.appendChild(movieStats);
+  MovieCard.appendChild(movieStats);
 
   const movieHeader = document.createElement("div");
   movieHeader.classList.add("movie-header");
@@ -76,13 +78,12 @@ const renderMovie = (movie, isFavorite = false) => {
 
   const moreDetails = document.createElement("span");
   moreDetails.classList.add("more-details");
-  moreDetails.textContent = "See more details"
-  movieCard.appendChild(moreDetails);
+  moreDetails.textContent = "See more details";
+  MovieCard.appendChild(moreDetails);
   moreDetails.onclick = async () => {
     const detailedMovie = await getMovieDetails(id);
-    renderMovieDetails(detailedMovie);
-  }
-
+    MovieDetails(detailedMovie);
+  };
 };
 
-export { renderMovie };
+export { MovieCard };

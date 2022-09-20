@@ -1,6 +1,6 @@
-import { BASE_URL, API_KEY, BASE_DETAILS_URL } from "../env/key.js";
-import { renderMovie } from "./renderMovie.js";
-import { filterFavoriteMovies } from "./localStorage.js";
+import { BASE_URL, API_KEY } from "../../env/env.js";
+import { MovieCard } from "../components/MovieCard.js";
+import { filterFavoriteMovies } from "../localStorage.js";
 
 const getPopularMovies = async () => {
   const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
@@ -9,7 +9,7 @@ const getPopularMovies = async () => {
 
   results.forEach((movie) => {
     const isFavorite = filterFavoriteMovies(movie);
-    renderMovie(movie, isFavorite);
+    MovieCard(movie, isFavorite);
   });
 };
 
@@ -21,13 +21,13 @@ const searchMovies = async (searchTerm) => {
 
   results.forEach((movie) => {
     const isFavorite = filterFavoriteMovies(movie);
-    renderMovie(movie, isFavorite);
+    MovieCard(movie, isFavorite);
   });
 };
 
 const getMovieDetails = async (id) => {
   const response = await fetch(
-    `${BASE_DETAILS_URL}${id}?api_key=${API_KEY}&language=en-US`
+    `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`
   );
   const data = await response.json();
 

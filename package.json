@@ -4,5 +4,8 @@
   "description": "Application to search and get info about cinema",
   "main": "index.js",
   "author": "TiagoAraujoDev <102497603+TiagoAraujoDev@users.noreply.github.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.2"
+  }
 }

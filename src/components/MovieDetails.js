@@ -1,12 +1,13 @@
-import { moviesContainer, clearMoviesContainer } from "./DOMElements.js";
+import { clearContainer } from "../utils/CleanerContainer.js";
 
 const getGenres = (genres) => {
-  const genreStr = genres.map((genre)=> genre.name)
+  const genreStr = genres.map((genre) => genre.name);
   return genreStr;
-}
+};
 
-const renderMovieDetails = (movie) => {
-  clearMoviesContainer();
+const MovieDetails = (movie) => {
+  const moviesContainer = document.querySelector(".movies-container");
+  clearContainer(".movies-container");
 
   const {
     title,
@@ -23,17 +24,17 @@ const renderMovieDetails = (movie) => {
     overview,
   } = movie;
 
-  const genreArr = getGenres(genres)
+  const genreArr = getGenres(genres);
 
   const imgURL = "https://image.tmdb.org/t/p/w500";
-  
+
   const detailsContainer = document.createElement("div");
   detailsContainer.classList.add("details-container");
   moviesContainer.appendChild(detailsContainer);
 
   const movieCover = document.createElement("div");
   movieCover.classList.add("movie-cover");
-  movieCover.style.backgroundImage = `url(${imgURL + poster_path})`
+  movieCover.style.backgroundImage = `url(${imgURL + poster_path})`;
   detailsContainer.appendChild(movieCover);
 
   const movieTitleInfo = document.createElement("div");
@@ -97,15 +98,15 @@ const renderMovieDetails = (movie) => {
   detailsContainer.appendChild(movieDetailsInfo2);
 
   const genre = document.createElement("span");
-  genre.textContent = `Genre: ${genreArr.join(", ")}`
+  genre.textContent = `Genre: ${genreArr.join(", ")}`;
   movieDetailsInfo2.appendChild(genre);
 
   const movieHomepage = document.createElement("span");
-  movieHomepage.innerHTML = `Homepage:<a href=${homepage}>${homepage}</a>`
+  movieHomepage.innerHTML = `Homepage:<a href=${homepage}>${homepage}</a>`;
   movieDetailsInfo2.appendChild(movieHomepage);
 
   const movieStatus = document.createElement("span");
-  movieStatus.textContent = `Status: ${status}`
+  movieStatus.textContent = `Status: ${status}`;
   movieDetailsInfo2.appendChild(movieStatus);
 
   const movieDescription = document.createElement("div");
@@ -119,7 +120,6 @@ const renderMovieDetails = (movie) => {
   const textDescription = document.createElement("p");
   textDescription.textContent = overview;
   movieDescription.appendChild(textDescription);
-
 };
 
-export { renderMovieDetails };
+export { MovieDetails };
